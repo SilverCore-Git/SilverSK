@@ -2,6 +2,86 @@
 Projet de scripts réaliser avec le plugin minecraft [skript](https://skript-mc.fr/) !
 ---
 # Projet en dévelopement | maquettes :
+## config.sk :
+```
+#
+# @copiryght = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+on load:
+    send "Loading config with ./plugins/skript/scripts/config.sk" to console
+
+    set {permmessage} to "%{prefix::dium}% &cVous n'avez pas accès à cette commande... (dommage dommage...)"
+    set {used} to "Utilisation :"
+
+    set {preprefix} to "&8[&l&bSilver"
+    set {prefix::chat} to "%{preprefix}%&8-&6chat&8]» &f"
+    set {prefix::dium} to "&8[&6Silverdium&8]» &f"
+    set {prefix::cheat} to "&8[&cSilver-AntiCheat&8]> &f"
+    set {prefix::inspect} to "&8[&4Silver-Inspect&8] &7"
+    set {prefix::join} to "&8[&6Silver-join&8]> &7"
+    set {prefix::staff} to "&8[&6Silver-stafftools&8] &7"
+
+
+command /config [<text>]:
+    permission: skript.staff.config
+    permission message: %{permmessage}%
+    trigger:
+        if arg-1 is "reload":
+            send "&8[&6Silverdium&8]» &fRechargement de la config..." to player
+
+            set {permmessage} to "%{prefix::dium}% &cVous n'avez pas accès à cette commande... (dommage dommage...)"
+            set {used} to "Utilisation :"
+
+            set {preprefix} to "&8[&l&bSilver"
+            set {prefix::chat} to "%{preprefix}%&8-&6chat&8]» &f"
+            set {prefix::dium} to "&8[&6Silverdium&8]» &f"
+            set {prefix::cheat} to "&8[&cSilver-AntiCheat&8]> &f"
+            set {prefix::inspect} to "&8[&4Silver-Inspect&8] &7"
+            set {prefix::join} to "&8[&6Silver-join&8]> &7"
+            set {prefix::staff} to "&8[&6Silver-stafftools&8] &7"
+
+            send "&8[&6Silverdium&8]» &fConfig rechargée !!" to player
+        else:
+            send "{@prefix}&cUsage : /config <target:reload>" to player
+
+#end
+```
+## onjoin.sk :
+```
+#
+# @copiryght = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+options:
+    prefix: %{prefix::join}%
+
+on load:
+    send "Loading skript ./plugins/skript/scripts/onjoin.sk" to console
+
+on first join:
+    send "{@prefix} Bienvenue sur silverdium !!" to player
+
+
+on join:
+    set {player_luckinfo::%player%} to 0
+    set {diamond_mined::%player%} to 0 
+    set {blocks_mined::%player%} to 0
+    set {_percent::%player%} to 0
+    set {vanish::%player%} to false
+    
+    if player's name is "MisterLyle" or "MisterPapaye":
+        broadcast "{@prefix} &eLe fondateur &b%player% &evient de se connecter !"
+    else:
+        send "{@prefix} Salut, &b%player%! &7Bonne game sur Silverdium !" to player
+        broadcast "{@prefix} &e%player% vient de se connecter !"
+
+#end
+```
 ## inspect.sk :
 ```
 #
@@ -123,6 +203,118 @@ command /inspect [<player>] [<text>]:
                 send "{@prefix}&l||&l================================" to player
         else:
             send "{@prefix}&cUsage : /inspect <player>" to player
+
+#end
+```
+## topluck :
+```
+#
+# @copiryght = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+on load:
+    send "Loading skript ./plugins/skript/scripts/topluck.sk" to console
+
+on break:
+    add 1 to {blocks_mined::%player%}
+    if event-block is diamond ore:
+        add 1 to {diamond_mined::%player%} 
+    if event-block is deepslate diamond ore:
+        add 1 to {diamond_mined::%player%} 
+
+
+command /topluck [<player>]:
+    permission: skript.staff.topluck
+    permission message: %{permmessage}%
+    trigger:
+        if arg-1 is set:
+            if {blocks_mined::%arg-1%} > 0:
+                set {_percent::%arg-1%} to ({diamond_mined::%arg-1%} * 100) / {blocks_mined::%arg-1%}
+                send "%{prefix::staff}% TopLuck | %arg-1% = &5%{_percent::%arg-1%}% &7/100" to player
+            else:
+                send "%{prefix::staff}% TopLuck | %arg-1% = &50 &7/100" to player
+        else:
+            wait 3 ticks
+            open chest with 6 rows named "&8[&4Top Luck&8]" to player
+            set {_slot} to 0
+            loop all players:
+                set {_head} to skull of loop-player
+                set name of {_head} to loop-player's name  
+                if {blocks_mined::%loop-player%} > 0: 
+                    set {_percent::%loop-player%} to ({diamond_mined::%loop-player%} * 100) / {blocks_mined::%loop-player%}
+                    set lore of {_head} to "&5%{_percent::%loop-player%}% /100" 
+                else:
+                    set lore of {_head} to "&40 /100" 
+                format slot {_slot} of player with {_head} to be unstealable 
+                add 1 to {_slot}
+
+
+
+#end
+
+```
+## anticheat.sk :
+```
+#
+# @copiryght = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+
+options:
+    prefix: "&8[&cSilver-AntiCheat&8]> &7"
+
+# Création de la blacklist
+on load:
+    send "Loading skript ./plugins/skript/scripts/anticheat.sk" to console
+
+    send "Black list player : %{blacklist::*}%" to console
+
+# Détection de connexion avec blacklist
+on join:
+    if player's name is {blacklist::*}:
+        send "&8[&cSilver-AntiCheat&8]> &7&e%player% &cTu es inscrit sur la BlackList, le Staff vient d'être averti de ta connexion !" to player
+        loop all players:
+            if loop-player has permission "skript.anticheat.alert":
+                send "&8[&cSilver-AntiCheat&8]> &7&e%player% &cest connecté et est inscrit sur la blacklist !" to loop-player
+
+
+# Détection de clics trop rapides (AutoClicker)
+on click:
+    if difference between {lastclick::%player%} and now < 55 millisecond:
+        cancel event
+        send "&8[&cSilver-AntiCheat&8]> &7&cDis donc, tu as un sacré CPS !" to player
+        loop all players:
+            if loop-player has permission "skript.anticheat.alert":
+                send "&8[&cSilver-AntiCheat&8]> &7&e%player% &cpourrait utiliser un AutoClicker !" to loop-player
+        add 1 to {suspect::%player%}
+    set {lastclick::%player%} to now
+
+# Détection de casse de blocs trop rapide
+on break:
+    if difference between {lastbreak::%player%} and now < 55 millisecond:
+        cancel event
+        send "&8[&cSilver-AntiCheat&8]> &7&cLes blocs se cassent si rapidement avec toi..." to player
+        loop all players:
+            if loop-player has permission "skript.anticheat.alert":
+                send "&8[&cSilver-AntiCheat&8]> &7&e%player% &cpourrait utiliser un AutoMine !" to loop-player
+        add 1 to {suspect::%player%}
+    set {lastbreak::%player%} to now
+
+# Surveillance des joueurs suspects
+every 1 minutes:
+    loop all players:
+        if {suspect::%loop-player%} >= 5:
+            loop all players:
+            execute console command "tempban %loop-player% 1d Salut, je suis le SilverAntiCheat et je crois que tu fais des choses pas très légales... Pour de l'aide rejoins le Discord https://silverdium.fr !"
+            if loop-player has permission "skript.anticheat.alert":
+                send "&8[&cSilver-AntiCheat&8]> &7&e%loop-player% &ca vien de se faire bannir par l'anticheat !" to loop-player
+            delete {suspect::%loop-player%}
+        
+
 
 #end
 ```
