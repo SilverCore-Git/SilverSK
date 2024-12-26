@@ -423,4 +423,4 @@ on chat:
 
 ---
 Copyright (c) 2024 SilverCore | Tous droits réservés.<br>
-Vous n'êtes pas autorisé à copier, modifier, distribuer, ou vendre ce code sans l'autorisation explicite de l'auteur.
+Vous n'êtes pas autorisé à vendre ce code sans l'autorisation explicite de l'auteur.
