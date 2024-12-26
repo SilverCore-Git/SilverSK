@@ -4,14 +4,14 @@ Projet de scripts réaliser avec le plugin minecraft [skript](https://skript-mc.
 ---
 # Projet en dévelopement voici des maquettes :
 ## Table des matieres :
-- [config.sk](#config.sk)
-- [onjoin.sk](#onjoin.sk)
-- [inspect.sk](#inspect.sk)
-- [topluck.sk](#topluck.sk)
-- [anticheat.sk](anticheat.sk)
+- [config.sk](#config-sk)
+- [onjoin.sk](#onjoin-sk)
+- [inspect.sk](#inspect-sk)
+- [topluck.sk](#topluck-sk)
+- [anticheat.sk](anticheat-sk)
 
 
-## config.sk :
+## config sk :
 ```
 #
 # @copiryght = 2024 SilverCore
@@ -58,7 +58,7 @@ command /config [<text>]:
 
 #end
 ```
-## onjoin.sk :
+## onjoin sk :
 ```
 #
 # @copiryght = 2024 SilverCore
@@ -91,7 +91,7 @@ on join:
 
 #end
 ```
-## inspect.sk :
+## inspect sk :
 ```
 #
 # @copiryght = 2024 SilverCore
@@ -215,7 +215,7 @@ command /inspect [<player>] [<text>]:
 
 #end
 ```
-## topluck.sk :
+## topluck sk :
 ```
 #
 # @copiryght = 2024 SilverCore
@@ -264,7 +264,7 @@ command /topluck [<player>]:
 #end
 
 ```
-## anticheat.sk :
+## anticheat sk :
 ```
 #
 # @copiryght = 2024 SilverCore
@@ -327,7 +327,7 @@ every 1 minutes:
 
 #end
 ```
-## chatmanager.sk :
+## chatmanager sk :
 ```
 #
 # @copiryght = 2024 SilverCore
