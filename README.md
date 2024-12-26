@@ -1,7 +1,16 @@
 # SivlerSK
-Projet de scripts réaliser avec le plugin minecraft [skript](https://skript-mc.fr/) !
+Projet de scripts réaliser avec le plugin minecraft [skript](https://skript-mc.fr/) et l'addon [SkQuery](https://www.spigotmc.org/resources/skquery-1-13-1-19.36631/) !
+
 ---
-# Projet en dévelopement | maquettes :
+# Projet en dévelopement voici des maquettes :
+## Table des matieres :
+- [config.sk](#config.sk)
+- [onjoin.sk](#onjoin.sk)
+- [inspect.sk](#inspect.sk)
+- [topluck.sk](#topluck.sk)
+- [anticheat.sk](anticheat.sk)
+
+
 ## config.sk :
 ```
 #
@@ -206,7 +215,7 @@ command /inspect [<player>] [<text>]:
 
 #end
 ```
-## topluck :
+## topluck.sk :
 ```
 #
 # @copiryght = 2024 SilverCore
@@ -317,6 +326,99 @@ every 1 minutes:
 
 
 #end
+```
+## chatmanager.sk :
+```
+#
+# @copiryght = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+on load:
+    send "Loading skript ./plugins/skript/scripts/chatmanager.sk" to console
+
+command /chatmanager:
+	aliases: cm
+	permission: skript.staff.chatm
+	permission message: %{permmessage}%
+	trigger:
+		open chest with 1 rows named "&6SilverChat &f- &cOptions" to player
+		wait 1 tick
+		format slot 0 of player with green wool named "&a&lActiver le Chat !" to close then run [make player execute command "chat enable"]
+		format slot 8 of player with red wool named "&c&lDésactiver le chat !" to close then run [make player execute command "chat disable"]
+		format slot 4 of player with paper named "&7&lClear le chat" to close then run [make player execute command "chat clear"]
+
+
+command /chat <text>:
+	aliases: c
+	permission: skript.staff.chatm
+	permission message: %{permmessage}%
+	trigger:
+		if arg 1 is "clear":
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast ""
+			broadcast "%{prefix::chat}% &fLe chat a été nettoyé par &c%player%"
+		if arg 1 is "enable":
+			set {chat.serveur} to true
+			broadcast "%{prefix::chat}% &cLe Chat a été activé par &c%player%"
+		if arg 1 is "disable":
+			set {chat.serveur} to false
+			broadcast "%{prefix::chat}% &cLe Chat a été désactivé par &c%player%"
+		if arg-1 is not set:
+			send "%{prefix::chat}% %{used}% /chat <target:clear|enable|disable>"
+			
+on chat:	
+	if {chat.serveur} is false:
+		cancel event
+		send "%{prefix::chat}% &cLe chat est désactivé, tu ne peux pas envoyer de messages !" to player
+	else:
+		stop
+
+
+#end 
 ```
 
 ---
