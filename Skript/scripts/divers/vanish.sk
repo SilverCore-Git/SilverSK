@@ -1,0 +1,31 @@
+#
+# @copiryght = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+on load:
+    send "Loading skript ./plugins/skript/scripts/vanish.sk" to console
+
+command /vanish:
+    permission: skript.staff.vanish
+    permission message: %{permmessage}%
+    trigger:
+        if {vanish::%player%} is false: 
+            wait 2 ticks
+            set {vanish::%player%} to true 
+            hide player from all players
+            set player's gamemode to creative
+            broadcast "&8[&6Silver-Join&8] &7&e%player% vient de se déconnecter !"
+            send "&8[&aSilver-Vanish&8] &7Tu es maintenant &ainvisible&7 !" to player
+            make player execute command "staffsetinv %player%"
+        else:
+            wait 2 ticks
+            set {vanish::%player%} to false 
+            reveal player from all players
+            set player's gamemode to creative
+            broadcast "{@prefix} &e%player% vient de se connecter !"
+            send "&8[&aSilver-Vanish&8] &7Tu es maintenant &cvisible&7 !" to player
+            make player execute command "staffgiveinv %player%"
+
+#end

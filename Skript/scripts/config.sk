@@ -1,0 +1,47 @@
+#
+# @copiryght = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+on load:
+    send "Loading config with ./plugins/skript/scripts/config.sk" to console
+
+    set {permmessage} to "%{prefix::dium}% &cVous n'avez pas accès à cette commande... (dommage dommage...)"
+    set {used} to "Utilisation :"
+
+    set {preprefix} to "&8[&l&bSilver"
+    set {prefix::chat} to "%{preprefix}%&8-&6chat&8]» &f"
+    set {prefix::dium} to "&8[&6Silverdium&8]» &f"
+    set {prefix::cheat} to "&8[&cSilver-AntiCheat&8]> &f"
+    set {prefix::inspect} to "&8[&4Silver-Inspect&8] &7"
+    set {prefix::join} to "&8[&6Silver-join&8]> &7"
+    set {prefix::staff} to "&8[&6Silver-stafftools&8] &7"
+    set {prefix::logs} to "&8[&6Silver-logs&8] &7"
+    
+
+
+command /config [<text>]:
+    permission: skript.staff.config
+    permission message: %{permmessage}%
+    trigger:
+        if arg-1 is "reload":
+            send "&8[&6Silverdium&8]» &fRechargement de la config..." to player
+
+            set {permmessage} to "%{prefix::dium}% &cVous n'avez pas accès à cette commande... (dommage dommage...)"
+            set {used} to "Utilisation :"
+
+            set {preprefix} to "&8[&l&bSilver"
+            set {prefix::chat} to "%{preprefix}%&8-&6chat&8]» &f"
+            set {prefix::dium} to "&8[&6Silverdium&8]» &f"
+            set {prefix::cheat} to "&8[&cSilver-AntiCheat&8]> &f"
+            set {prefix::inspect} to "&8[&4Silver-Inspect&8] &7"
+            set {prefix::join} to "&8[&6Silver-join&8]> &7"
+            set {prefix::staff} to "&8[&6Silver-stafftools&8] &7"
+            set {prefix::logs} to "&8[&6Silver-logs&8] &7"
+
+            send "&8[&6Silverdium&8]» &fConfig rechargée !!" to player
+        else:
+            send "{@prefix}&cUsage : /config <target:reload>" to player
+
+#end

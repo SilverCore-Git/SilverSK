@@ -1,0 +1,54 @@
+# @copiryght = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+
+options:
+    prefix: %{prefix::dium}%
+
+on load:
+    send "Loading skript ./plugins/skript/scripts/home/player_home.sk" to console
+
+command /sethome [<text>]:
+    permission: skript.home
+    permission message: "Vous n'avez pas la permission de définir un home!"
+    trigger:
+        if arg-1 is set:
+            set {_home} to player's location
+            set {homes::%player%::%arg-1%} to {_home}
+            add arg-1 to {homes::%player%::list::*}
+            send "{@prefix}Votre home &6'%arg-1%' &fa été défini !" to player
+        else:
+            send "{@prefix}&cUsage : /sethome <home>" to player
+
+command /delhome [<text>]:
+    permission: skript.home
+    permission message: "Vous n'avez pas la permission de supprimer un home!"
+    trigger:
+        if arg-1 is set:
+            remove {homes::%player%::%arg-1%} from {homes::%player%::*}
+            remove {homes::%player%::list::%arg-1%} from {homes::%player%::list::*}
+            send "{@prefix}Votre home &6'%arg-1%' &fa été supprimé !" to player
+        else:
+            send "{@prefix}&cUsage : /delhome <home>" to player
+
+command /home [<text>]:
+    permission: skript.home
+    permission message: "Vous n'avez pas la permission de téléporter à un home!"
+    trigger:
+        if arg-1 is set:
+            if {homes::%player%::%arg-1%} is set:
+                send "{@prefix}Téléportation au home &6'%arg-1%' &fdans &63..." to player
+                wait 15 ticks
+                send "{@prefix}Téléportation au home &6'%arg-1%' &fdans &62..." to player
+                wait 15 ticks
+                send "{@prefix}Téléportation au home &6'%arg-1%' &fdans &61..." to player
+                wait 15 ticks
+                teleport player to {homes::%player%::%arg-1%}
+                send "{@prefix}Téléportation au home &6'%arg-1%' &fréussie !!" to player
+            else:
+                send "{@prefix}&cLe home &6'%arg-1%' &cn'existe pas!" to player
+        else:
+            set {_homes::*} to {homes::%player%::list::*}
+            send "{@prefix}Vos homes : &6%{_homes::*}%" to player
+            
+#end

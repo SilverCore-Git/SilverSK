@@ -1,0 +1,31 @@
+#
+# @copiryght = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+options:
+    $: %{balance::currency}%
+
+on load:
+    send "Loading skript ./plugins/skript/scripts/money/topmoney.sk" to console
+    
+    
+command /topmoney:
+    permission: skript.topmoney
+    permission message: %{permmessage}%
+    trigger:
+        wait 3 ticks
+        open chest with 6 rows named "&8[&4Top Money&8]" to player
+        set {_slot} to 0
+        loop all players:
+            set {_head} to skull of loop-player
+            set name of {_head} to loop-player's name
+            set lore of {_head} to "&a%{balance::%loop-player%}%{@$}"
+            format slot {_slot} of player with {_head} to be unstealable
+            add 1 to {_slot}
+
+
+
+
+#end

@@ -1,0 +1,49 @@
+#
+# @copiryght = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+options:
+    $: %{balance::currency}%
+    prefix: &a[Silver-Money] &f
+
+command /money:
+    permission: skript.money
+    permission message: %{permmessage}%
+    trigger:
+
+        if {balance::%player%} is "":
+            message "{@prefix}Tu n'a actuelement pas d'argent."
+
+        else:
+            message "{@prefix}Tu a actuelement &a%{balance::%player%}%{@$} &f!!"
+
+
+command /pay [<player>] [<text>]:
+    permission: skript.money
+    permission message: %{permmessage}%
+    trigger:
+
+        if arg-1 is set:
+            if arg-2 is set:
+                set {_money} to arg-2 parsed as a number
+                if {balance::%player%} < {_money}:
+                    message "{@prefix}&cTu n'a pas asser d'argents !"
+                if {_money} is set:
+                    add {_money} to {balance::%arg-1%}
+                    remove {_money} from {balance::%player%}
+
+                    message "{@prefix}Tu vien d'envoyer &a%arg-2%{@$} &fau joueur &6%arg-1%&f."
+
+                    send "{@prefix}&6%player% &fvient de te virer &a%arg-2%{@$}&f."
+                else:
+                    message "{@prefix}&cErreur&f lors de la recupération de la variable : {_money} : %{_money}%"
+
+            else:
+                send "{@prefix}&cUsage : /pay <player> <count>" to player
+        else:
+            send "{@prefix}&cUsage : /pay <player> <count>" to player
+
+
+#end

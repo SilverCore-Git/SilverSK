@@ -1,0 +1,30 @@
+#
+# @copiryght = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+options:
+    prefix: %{prefix::join}%
+
+on load:
+    send "Loading skript ./plugins/skript/scripts/onjoin.sk" to console
+
+on first join:
+    send "{@prefix} Bienvenue sur silverdium !!" to player
+
+
+on join:
+    set {player_luckinfo::%player%} to 0
+    set {diamond_mined::%player%} to 0 
+    set {blocks_mined::%player%} to 0
+    set {_percent::%player%} to 0
+    set {vanish::%player%} to false
+    
+    if player's name is "MisterLyle" or "MisterPapaye":
+        broadcast "{@prefix} &eLe fondateur &b%player% &evient de se connecter !"
+    else:
+        send "{@prefix} Salut, &b%player%! &7Bonne game sur Silverdium !" to player
+        broadcast "{@prefix} &e%player% vient de se connecter !"
+
+#end

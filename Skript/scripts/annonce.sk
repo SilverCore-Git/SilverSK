@@ -1,0 +1,25 @@
+#
+# @copiryght = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+on load:
+    send "Loading skript ./plugins/skript/scripts/annonce.sk" to console
+
+command /annonce [<text>] [<player>]:
+    permission: skript.staff.annonce
+    permission message: %{permmessage}%
+    trigger:
+        if arg-1 is not set:
+            send "%{prefix::dium}% &cVeuillez spécifier un message à annoncer." to player
+        else:
+            if arg-2 is set:
+                send "%{prefix::dium}% &l%arg-1%" to arg-2
+                send "%{prefix::dium}% &aAnnonce envoyée à &e%arg-2%&a." to player
+            else:
+                broadcast "%{prefix::dium}% &l%arg-1%"
+                send "%{prefix::dium}% &aAnnonce diffusée à tous les joueurs." to player
+
+
+#end

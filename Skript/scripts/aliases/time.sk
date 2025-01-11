@@ -1,0 +1,24 @@
+#
+# @copiryght = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+on load:
+    send "Loading skript ./plugins/skript/scripts/aliases/time.sk" to console
+
+command /day:
+    aliases: gc
+    permission: skript.time
+    permission message: %{permmessage}%
+    trigger:
+        set time to day
+
+command /night:
+    aliases: gc
+    permission: skript.time
+    permission message: %{permmessage}%
+    trigger:
+        set time to night
+
+#end

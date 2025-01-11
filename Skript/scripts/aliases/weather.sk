@@ -1,0 +1,28 @@
+#
+# @copiryght = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+on load:
+    send "Loading skript ./plugins/skript/scripts/aliases/weather.sk" to console
+
+command /w [<text>]:
+    aliases: weather
+    permission: skript.weather
+    permission message: %{permmessage}%
+    trigger:
+
+        if arg-1 is set:
+            if arg-1 is "clear":
+
+                make player execute command "/weather clear"
+
+            else:
+                send "{@prefix}&cUsage : /w <target:clear>" to player
+        else:
+            send "{@prefix}&cUsage : /w <target:clear>" to player
+
+
+
+#end

@@ -1,0 +1,44 @@
+#
+# @copiryght = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+options:
+    prefix: %{prefix::staff}%
+
+on load:
+    send "Loading skript ./plugins/skript/scripts/staffcmds.sk" to console
+
+command /staffsetinv [<text>]:
+	permission: skript.staff.setinv
+	permission message: %{permmessage}%
+	trigger:
+		set {_count} to 0
+		loop 36 times:
+			set {inv.%{_count}%.main.%arg 1%} to slot {_count} of player's inventory
+			add 1 to {_count}
+		set {inv.casque.main.%arg 1%} to player's helmet
+		set {inv.ventre.main.%arg 1%} to player's chestplate
+		set {inv.jambes.main.%arg 1%} to player's leggings
+		set {inv.pieds.main.%arg 1%} to player's boots
+		clear player's inventory
+		add arg 1 to {list.kit::*}
+
+
+			
+command /staffgiveinv [<text>]:
+	permission: skript.staff.giveinv
+	permission message: %{permmessage}%
+	trigger:
+		wait 3 ticks
+		set {_count} to 0
+		loop 36 times:
+			set slot {_count} of player's inventory to {inv.%{_count}%.main.%arg 1%}
+			add 1 to {_count}
+		set the helmet of player to {inv.casque.main.%arg 1%}
+		set the chestplate of player to {inv.ventre.main.%arg 1%}
+		set the leggings of player to {inv.jambes.main.%arg 1%}
+		set the boots of player to {inv.pieds.main.%arg 1%}		
+
+#end

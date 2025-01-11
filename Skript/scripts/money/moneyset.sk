@@ -1,0 +1,60 @@
+#
+# @copiryght = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+options:
+    $: %{balance::currency}%
+    prefix: &a[Silver-Money] &f
+
+command /eco [<text>] [<player>] [<text>]:
+    permission: skript.eco
+    permission message: %{permmessage}%
+    trigger:
+
+        if arg-1 is set:
+            if arg-2 is set:
+
+                if arg-1 is "see":
+
+                    if {balance::%arg-2%} is "":
+                        message "{@prefix}%arg-2% n'a actuelement pas d'argent."
+            
+                    else:
+                        message "{@prefix}%arg-2% a actuelement &a%{balance::%arg-2%}%{@$} &f!!"
+                    
+                if arg-1 is "give":
+                    if arg-3 is set:
+
+                        set {_money} to arg-3 parsed as a number
+                        add {_money} to {balance::%arg-2%}
+                        message "{@prefix}%arg-2% vien de recevoir &a%{_money}%{@$} &f!!"
+
+                if arg-1 is "take":
+                    if arg-3 is set:
+
+                        set {__money} to {balance::%arg-2%} - arg-3 parsed as a number
+                        set {balance::%arg-2%} to {__money}
+                        message "{@prefix}%arg-2% vien de perdre &a%arg-3%{@$}&f il a maintenan &a%{balance::%arg-2%}%{@$}."
+
+                if arg-1 is "set":
+                    if arg-3 is set:
+
+                        set {balance::%arg-2%} to {_money}
+                        message "{@prefix}%arg-2% possede maintenan &a%{_money}%{@$} &f."
+
+                if arg-1 is "reset":
+
+                    set {balance::%arg-2%} to 0
+                    message "{@prefix}%arg-2% vien de se faire reinitialiser il a maintenan :  &a%{_money}%{@$} &f!!"
+
+            else:
+                send "{@prefix}&cUsage : /eco <target : give, take, set, see, reset> <player> <count>" to player
+        
+        else:
+            send "{@prefix}&cUsage : /eco <target : give, take, set, see, reset> <player> <count>" to player
+
+
+
+#end

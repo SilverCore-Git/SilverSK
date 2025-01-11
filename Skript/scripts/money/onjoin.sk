@@ -1,0 +1,14 @@
+#
+# @copiryght = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+on load:
+    send "Loading skript ./plugins/skript/scripts/money/onjoin.sk" to console
+    set {balance::currency} to "$"
+
+on first join:
+    set {balance::%player%} to "1000"
+
+#end

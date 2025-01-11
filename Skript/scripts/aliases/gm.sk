@@ -1,0 +1,39 @@
+#
+# @copiryght = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+on load:
+    send "Loading skript ./plugins/skript/scripts/aliases/gm.sk" to console
+
+command /gmc:
+    aliases: gc
+    permission: skript.gamemode
+    permission message: %{permmessage}%
+    trigger:
+        set player's gamemode to creative
+
+command /gms:
+    aliases: gc
+    permission: skript.gamemode
+    permission message: %{permmessage}%
+    trigger:
+        set player's gamemode to survival
+
+command /gmsp:
+    aliases: gc
+    permission: skript.gamemode
+    permission message: %{permmessage}%
+    trigger:
+        set player's gamemode to spectator
+
+command /gma:
+    aliases: gc
+    permission: skript.gamemode
+    permission message: %{permmessage}%
+    trigger:
+        set player's gamemode to adventure
+
+
+#end

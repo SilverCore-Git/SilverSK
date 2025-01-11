@@ -1,0 +1,84 @@
+# @copiryght = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+
+options:
+    prefix: %{prefix::dium}%
+
+on load:
+    send "Loading skript ./plugins/skript/scripts/home/staff_home.sk" to console
+
+command /shome [<text>] [<player>] [<text>]:
+    permission: skript.saff.home
+    permission message: "Vous n'avez pas la permission de définir un home!"
+    trigger:
+        if arg-1 is set:
+
+            if arg-1 is "see":
+                if arg-2 is set:
+                    set {_homes::*} to {homes::%player%::list::*}
+                    send "{@prefix}Liste des homes de &6%arg-2%&f : &6%{_homes::*}%" to player
+                else:
+                    send "{@prefix}&cUsage : /shome <target : see, add, reset, remove, tp> <player> <home>" to player
+
+            if arg-1 is "add":
+                if arg-2 is set:
+                    if arg-3 is set:
+                        set {_home} to player's location
+                        set {homes::%arg-2%::%arg-3%} to {_home}
+                        add arg-1 to {homes:::%arg-2%::list::*}
+                        send "{@prefix}Home &6'%arg-3%' &fa été ajouter au joueur &6%arg-2% !" to player
+                        send "{@prefix}Home &6'%arg-3%' &fa été ajouter au joueur &6%arg-2% par %player% !" to console
+                        loop all players:
+                            if loop-player has permission "skript.staff.alert":
+                                send "%{prefix::logs}% Le modérateur &6%player% &fa ajouter le home &6%arg-3% &fau joueur &6%arg-2%&f." to loop-player
+                    else:
+                        send "{@prefix}Home &6'%arg-3%' &fa été ajouter au joueur &6%arg-2% !" to player
+                else:
+                    send "{@prefix}Home &6'%arg-3%' &fa été ajouter au joueur &6%arg-2% !" to player
+            
+            if arg-1 is "reset":
+                if arg-2 is set:
+                    remove {homes::%arg-2%::*} from {homes::%arg-2%::*}
+                    send "{@prefix}Les home du joueur &6'%arg-2%' &font été réinitialiser !" to player
+                    send "{@prefix}Les home du joueur &6'%arg-2%' &font été réinitialiser par %player% !" to console
+                    loop all players:
+                        if loop-player has permission "skript.staff.alert":
+                            send "%{prefix::logs}% Le modérateur &6%player% &fa reinitialiser les homes du joueur &6%arg-2%&f." to loop-player
+                else:
+                    send "{@prefix}&cUsage : /shome <target : see, add, reset, remove, tp> <player> <home>" to player
+
+            if arg-1 is "remove":
+                if arg-2 is set:
+                    if arg-3 is set:
+                        remove {homes::%arg-2%::%arg-3%} from {homes::%arg-2%::*}
+                        remove {homes::%arg-2%::list::%arg-3%} from {homes::%arg-2%::list::*}
+                        send "{@prefix}Le home %arg-3% du joueur &6'%arg-2%' &fa été réinitialiser !" to player
+                        send "{@prefix}Le home %arg-3% du joueur &6'%arg-2%' &fa été réinitialiser par %player% !" to console
+                        loop all players:
+                            if loop-player has permission "skript.staff.alert":
+                                send "%{prefix::logs}% Le modérateur &6%player% &fa suprimer le home %arg-3% du joueur &6'%arg-2%'&f." to loop-player
+                    else:
+                        send "{@prefix}&cUsage : /shome <target : see, add, reset, remove, tp> <player> <home>" to player
+                else:
+                    send "{@prefix}&cUsage : /shome <target : see, add, reset, remove, tp> <player> <home>" to player
+        
+            if arg-1 is "tp":
+                if arg-2 is set:
+                    if arg-3 is set:
+                        teleport player to {homes::%arg-2%::%arg-3%}
+                        send "{@prefix}Téléportation vers le home &6%arg-3% &fdu joueur &6%arg-2%&f." to player
+                        send "{@prefix}Téléportation du modérateur %player% vers le home &6%arg-3% &fdu joueur &6%arg-2%&f." to console
+                        loop all players:
+                            if loop-player has permission "skript.staff.alert":
+                                send "%{prefix::logs}% Téléportation du modérateur %player% vers le home &6%arg-3% &fdu joueur &6%arg-2%&f." to loop-player
+                    else:
+                        send "{@prefix}&cUsage : /shome <target : see, add, reset, remove, tp> <player> <home>" to player
+                else:
+                    send "{@prefix}&cUsage : /shome <target : see, add, reset, remove, tp> <player> <home>" to player
+
+        else:
+            send "{@prefix}&cUsage : /shome <target : see, add, reset, remove, tp> <player> <home>" to player
+
+
+#end

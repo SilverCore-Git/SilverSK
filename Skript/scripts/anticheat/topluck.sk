@@ -1,0 +1,46 @@
+#
+# @copiryght = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+on load:
+    send "Loading skript ./plugins/skript/scripts/topluck.sk" to console
+
+on break:
+    add 1 to {blocks_mined::%player%}
+    if event-block is diamond ore:
+        add 1 to {diamond_mined::%player%} 
+    if event-block is deepslate diamond ore:
+        add 1 to {diamond_mined::%player%} 
+
+
+command /topluck [<player>]:
+    permission: skript.staff.topluck
+    permission message: %{permmessage}%
+    trigger:
+        if arg-1 is set:
+            if {blocks_mined::%arg-1%} > 0:
+                set {_percent::%arg-1%} to ({diamond_mined::%arg-1%} * 100) / {blocks_mined::%arg-1%}
+                send "%{prefix::staff}% TopLuck | %arg-1% = &5%{_percent::%arg-1%}% &7/100" to player
+            else:
+                send "%{prefix::staff}% TopLuck | %arg-1% = &50 &7/100" to player
+        else:
+            wait 3 ticks
+            open chest with 6 rows named "&8[&4Top Luck&8]" to player
+            set {_slot} to 0
+            loop all players:
+                set {_head} to skull of loop-player
+                set name of {_head} to loop-player's name  
+                if {blocks_mined::%loop-player%} > 0: 
+                    set {_percent::%loop-player%} to ({diamond_mined::%loop-player%} * 100) / {blocks_mined::%loop-player%}
+                    set lore of {_head} to "&5%{_percent::%loop-player%}% /100" 
+                else:
+                    set lore of {_head} to "&40 /100" 
+                format slot {_slot} of player with {_head} to be unstealable 
+                add 1 to {_slot}
+
+on inventory click:
+	if name of event-inventory contains "&8[&4Top Luck&8]":
+
+#end
