@@ -1,0 +1,70 @@
+#
+# @copyright = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+options: 
+    prefix: %{prefix::dium}%
+
+command /warp [<text>]:
+    aliases: wp
+    permission: skript.warp
+    permission message: %{permmessage}%
+    trigger:
+        if arg-1 is set:
+            if {warp::%arg-1%} is set:
+
+                send "{@prefix}Téléportation a &6'%arg-1%' &fdans &63..." to player
+                wait 15 ticks
+                send "{@prefix}Téléportation a &6'%arg-1%' &fdans &62..." to player
+                wait 15 ticks
+                send "{@prefix}Téléportation a &6'%arg-1%' &fdans &61..." to player
+                wait 15 ticks
+                teleport player to {warp::%arg-1%}
+                send "{@prefix}Téléportation a &6'%arg-1%' &fréussie !!" to player
+            
+            else:
+                send "{@prefix}&cLa warp &6'%arg-1%' &cn'existe pas!" to player
+        else:
+            if {warp::%arg-1%} is set:
+                message "{@prefix}Les warp sont : %{warp::list::*}%"
+            else:
+                message "{@prefix}Il n'y a aucune warp pour le moment."
+
+
+command /setwarp [<text>]:
+    aliases: swp
+    permission: skript.warp.set
+    permission message: %{permmessage}%
+    trigger:
+        if arg-1 is set:
+
+            set {_locate} to player's location
+            set {warp::%arg-1%} to {_locate}
+            add arg-1 to {warp::list::*}
+            send "{@prefix}La warp &6'%arg-1%' &fa été défini !" to player
+
+        else:
+            send "{@prefix}&cUsage : /setwarp <warp>" to player
+
+
+command /delwarp [<text>]:
+    aliases: dwp
+    permission: skript.warp.del
+    permission message: %{permmessage}%
+    trigger:
+        if arg-1 is set:
+
+            set {_locate} to player's location
+            remove {warp::%arg-1%} from {warp::*}
+            remove arg-1 from {warp::list::*}
+            send "{@prefix}La warp &6'%arg-1%' &fa été suprimé !" to player
+
+        else:
+            send "{@prefix}&cUsage : /delwarp <warp>" to player
+
+
+
+
+#end

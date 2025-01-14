@@ -1,19 +1,19 @@
 #
-# @copiryght = 2024 SilverCore
+# @copyright = 2024 SilverCore
 # @autor = Silverdium
 # @autor = MisterPapaye
 #
 
 command /god:
     permission: skript.staff.god
-    permission message: &cVous n'avez pas la permission pour cela.
+    permission message: %{permmessage}%
     trigger:
         if {god::%player%} is true:
             set {god::%player%} to false
-            message "&fMode god &cdésactivé&f. Vous pouvez maintenant prendre des dégâts."
+            message "%{prefix::dium}%&7Mode god &cdésactivé&7. Vous pouvez maintenant prendre des dégâts."
         else:
             set {god::%player%} to true
-            message "&fMode god &aactivé&f. Vous ne prendrez désormais plus de dégâts."
+            message "%{prefix::dium}%&7Mode god &aactivé&7. Vous ne prendrez désormais plus de dégâts."
 
 on damage:
     if {god::%victim%} is true:

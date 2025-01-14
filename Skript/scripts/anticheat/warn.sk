@@ -1,0 +1,44 @@
+#
+# @copyright = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+options:
+    prefix: %{prefix::cheat}%
+
+command /warn [<player>] [<text>]:
+    permission: skript.staff.warn
+    permission message: %{permmessage}%
+    trigger:
+        if arg-1 is set:
+            if arg-2 is set:
+                send "{@prefix}&c Tu a été warn pour la raison suivante : &6%arg-2%" to arg-1
+
+                if {warn::%arg-1%} is not set:
+                    set {warn::%arg-1%} to 1
+                else:
+                    add 1 to {warn::%arg-1%}
+
+                loop all players:
+                    if loop-player has permission "skript.anticheat.alert":
+                        send "&8[&cSilver-AntiCheat&8]> &7&e%arg-1% &c &fvien de se faire avertir pour : &c%arg-2% &fpar le.a moderateur.trice : &6%player% !" to loop-player
+
+                send "{@prefix}%arg-1% a bien été averti, il maintenan %{warn::%arg-1%}% warn !!"
+
+
+every 1 hour:
+    loop all players:
+        if {warn::%loop-player%} is set:
+            if {warn::%loop-player%} > 3:
+                broadcast "olala"
+                remove 1 from {warn::%loop-player%}
+
+every 10 minute:
+    loop all players:
+        if {warn::%loop-player%} is set:
+            if {warn::%loop-player%} > 5:
+                execute console command "tempban 1h Salut c'est le SilverAnticheat !! tu a eu trop d'avertissement..."
+
+
+#end

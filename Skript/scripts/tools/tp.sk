@@ -1,0 +1,108 @@
+#
+# @copyright = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+options:
+    prefix: %{prefix::dium}%
+    log: false
+
+command /tpa [<player>]:
+    permission: skript.tp.tpa
+    permission message: %{permmessage}%
+    trigger:
+        set {_player} to arg-1
+        if {_player} is set:
+            send "{@prefix}&6%player% &cveut se téléporter sur votre position &f!!" to {_player}
+            send "{@prefix}Pour accepter la demande : &c/tpaccept" to {_player}
+            set {tpa::%{_player}%::%player%} to {_player}'s location
+            set {tpa::%{_player}%::name::name} to player's name
+
+            send "{@prefix}Demande de téléportation envoyer a &6%{_player}% !!" to player
+            wait 10*20 ticks
+            remove {tpa::%{_player}%::%player%} from {tpa::%{_player}%::*}
+            remove {tpa::%{_player}%::name::name} from {tpa::%{_player}%::name::*}
+        else:
+            send "{@prefix}&cUsage : /tpa <player>" to player
+
+command /tpaccept:
+    permission: skript.tp.tpaccept
+    permission message: %{permmessage}%
+    trigger:
+        if {tpa::%player%::name::name} is set:
+            send "{@prefix}Téléportation dans &63..." to player
+            wait 15 ticks
+            send "{@prefix}Téléportation dans &62..." to player
+            wait 15 ticks
+            send "{@prefix}Téléportation dans &61..." to player
+            wait 15 ticks
+            teleport player to {tpa::%player%::%{tpa::%player%::name::name}%}
+            send "{@prefix}Téléportation réussie !!" to player
+        else:
+            send "{@prefix}Aucunne demande de téléportation pour le moment." to player
+
+
+command /tpo [<player>]:
+    permission: skript.tp.tpo
+    permission message: %{permmessage}%
+    trigger:
+        send "{@prefix}Téléportation vers %player%"
+        teleport player to arg-1
+
+
+command /tpr:
+    permission: skript.tp.tpr
+    permission message: %{permmessage}%
+    trigger:
+        set {_1} to random integer between -2 and 146
+        set {_2} to random integer between -456 and 956
+        set {_3} to random integer between -89 and 146
+        set {_4} to random integer between 11 and 412
+
+        set {_x} to {_1}*{_4}-{_1}*{_3}
+        set {_y} to {_4}-{_1}*{_2}
+        if {@log} is true:
+            send "1 = %{_1}%"
+            send "2 = %{_2}%"
+            send "3 = %{_3}%"
+            send "4 = %{_4}%"
+            send "x = %{_x}%"
+            send "y = %{_y}%"
+
+        if {_y} > 50000:
+            if {@log} is true:
+                send "return" to player
+            make player execute command "/tpr"
+            stop
+        if {_y} < -50000:
+            if {@log} is true:
+                send "return" to player
+            make player execute command "/tpr"
+            stop
+        if {_y} = 0:
+            if {@log} is true:
+                send "return" to player
+            make player execute command "/tpr"
+            stop
+
+        if {_x} > 50000:
+            if {@log} is true:
+                send "return" to player
+            make player execute command "/tpr"
+            stop
+        if {_x} < -50000:
+            if {@log} is true:
+                send "return" to player
+            make player execute command "/tpr"
+            stop
+        if {_y} = 0:
+            if {@log} is true:
+                send "return" to player
+            make player execute command "/tpr"
+            stop
+
+        send "{@prefix}Téléportation aux coordonée suivant : x = %{_x}% | y = %{_y}%" to player
+        make player execute command "/tp %player% %{_x}% ~ %{_y}%"
+
+# end

@@ -1,0 +1,36 @@
+#
+# @copyright = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+on join:
+    if {spawn::xyz} is set:
+        teleport player to {spawn::xyz}
+    else:
+        broadcast "&cERREUR : spawn non deffini !!"
+        broadcast "&cMerci de rapporter cette erreur au staff !!"
+
+command /spawn:
+    trigger:
+        if {spawn::xyz} is set:
+            teleport player to {spawn::xyz}
+        else:
+            message "&cERREUR : spawn non deffini !!"
+            message "&cMerci de rapporter cette erreur au staff !!"
+
+command /setspawn:
+    permission: skript.staff.setspawn
+    permission message: %{permmessage}%
+    trigger:
+        set {spawn::xyz} to player's location
+        send "%{prefix::dium}%Le spawn a été défini au coordoné suivent : %{spawn::xyz}%"
+
+command /delspawn:
+    permission: skript.staff.delspawn
+    permission message: %{permmessage}%
+    trigger:
+        remove {spawn::xyz} from {spawn::*}
+        message "&cSpawn supprimer !!"
+
+#end

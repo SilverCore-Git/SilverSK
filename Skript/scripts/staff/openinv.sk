@@ -1,0 +1,42 @@
+#
+# @copyright = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+
+command /openinv [<player>] [<text>]:
+    aliases: oi
+    permission: skript.staff.openinv
+    permission message: %{permmessage}%
+    trigger:
+        if arg 1 is not set:
+            send "%{prefix::staff}%&cUsage : /openinv <player> <target : inv, armor>" to player
+        
+        else:
+            if arg-2 is not set:
+                open inventory of arg 1 to player
+            if arg 2 is "inv":
+                open inventory of arg 1 to player
+            
+            if arg 2 is "armor":
+                set {_helmet.%player%} to helmet of arg 1
+                set {_chestplate.%player%} to chestplate of arg 1
+                set {_leggings.%player%} to leggings of arg 1
+                set {_boots.%player%} to boots of arg 1
+                open chest with 1 row named "&8Inventaire de %arg 1%" to player
+                wait a tick
+                set slot 0 of current inventory of player to {_helmet.%player%}
+                set slot 1 of current inventory of player to {_chestplate.%player%}
+                set slot 2 of current inventory of player to {_leggings.%player%}
+                set slot 3 of current inventory of player to {_boots.%player%}
+                set slot 4 of current inventory of player to gray stained glass pane named " "
+                set slot 5 of current inventory of player to gray stained glass pane named " "
+                set slot 6 of current inventory of player to gray stained glass pane named " "
+                set slot 7 of current inventory of player to gray stained glass pane named " "
+                set slot 8 of current inventory of player to gray stained glass pane named " "
+
+on inventory click:
+    if name of event-item is " ":
+        cancel event
+

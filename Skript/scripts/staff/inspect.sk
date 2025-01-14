@@ -1,5 +1,5 @@
 #
-# @copiryght = 2024 SilverCore
+# @copyright = 2024 SilverCore
 # @autor = Silverdium
 # @autor = MisterPapaye
 #
@@ -25,19 +25,9 @@ on first join:
 on join:
     set {join-time::%player%} to time
 
-on chunk load:
-    loop all players:
-        if loop-player is online:
-            add 1 to {chunkloaded::%loop-player%}
-
-on chat:
-    add 1 to {chatnumber::%player%}
-
 on kick:
     add 1 to {kickcount::%player%}
 
-on death of player:
-    add 1 to {deathcount::%victim%}
 
 # /inspect commande
 command /inspect [<player>] [<text>]:
@@ -62,10 +52,10 @@ command /inspect [<player>] [<text>]:
                 else:
                     send "{@prefix}&l|| - &bKick &f: &aAucun kick pour le moment (gg)." to player
 
-                if {kickcount::%player%} is set:
-                    send "{@prefix}&l|| - &bKick &f: &c%{kickcount::%player%}%&7." to player
+                if {warn::%player%} is set:
+                    send "{@prefix}&l|| - &bWarn &f: &c%{warn::%player%}%&7." to player
                 else:
-                    send "{@prefix}&l|| - &bKick &f: &aAucun kick pour le moment (gg)." to player
+                    send "{@prefix}&l|| - &bWarn &f: &aAucun warn." to player
 
                 if {suspect::%player%} is set:
                     send "{@prefix}&l|| - &bSuspicion &f: &c%{suspect::%player%}%&7 points." to player
@@ -84,31 +74,25 @@ command /inspect [<player>] [<text>]:
                 else:
                     send "{@prefix}&l|| - &bFirst join &f: &cAucune donnée disponible." to player
 
-                send "{@prefix}&l|| - &bJoin time &f: &e%{_hours}%:%{_minutes}%:%{_seconds}%." to player
-
                 if {timeingameh::%player%} is set:
                     send "{@prefix}&l|| - &bTime in game &f: &c%{timeingameh::%player%}%:%{timeingamemn::%player%}%&7." to player
                 else:
                     set {timeingameh::%player%} to 0
                     send "{@prefix}&l|| - &bTime in game &f: &c%{timeingameh::%player%}%:%{timeingamemn::%player%}%&7." to player
 
-                if {chunkloaded::%player%} is set:
-                    send "{@prefix}&l|| - &bChunk loaded &f: &c%{chunkloaded::%player%}%&7." to player
+                if {warn::%player%} is set:
+                    send "{@prefix}&l|| - &bWarn &f: &c%{warn::%player%}%&7." to player
                 else:
-                    send "{@prefix}&l|| - &bChunk loaded &f: &aAucun Chunk charger." to player
-                
-                if {chatnumber::%player%} is set:
-                    send "{@prefix}&l|| - &bPosted message &f: &c%{chatnumber::%player%}%&7." to player
+                    send "{@prefix}&l|| - &bWarn &f: &aAucun warn." to player
+
+                if {kickcount::%player%} is set:
+                    send "{@prefix}&l|| - &bKick &f: &c%{kickcount::%player%}%&7." to player
                 else:
-                    send "{@prefix}&l|| - &bPosted message &f: &aAucun message envoyer." to player
+                    send "{@prefix}&l|| - &bKick &f: &aAucun kick pour le moment (gg)." to player
+            
 
                 set {_percent::%player%} to ({diamond_mined::%player%} * 100) / {blocks_mined::%player%}
                 send "{@prefix}&l|| - &bTopLuck &f: &c%{_percent::%player%}%&7 /100." to player
-
-                if {deathcount::%player%} is set:
-                    send "{@prefix}&l|| - &bDeath &f: &c%{deathcount::%player%}%&7." to player
-                else:
-                    send "{@prefix}&l|| - &bDeath &f: &aAucune morts pour le moment (quelle géni)." to player
 
                 if {suspect::%player%} is set:
                     send "{@prefix}&l|| - &bSuspicion &f: &c%{suspect::%player%}%&7 points." to player

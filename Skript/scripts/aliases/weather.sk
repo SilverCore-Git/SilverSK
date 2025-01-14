@@ -1,5 +1,5 @@
 #
-# @copiryght = 2024 SilverCore
+# @copyright = 2024 SilverCore
 # @autor = Silverdium
 # @autor = MisterPapaye
 #
@@ -16,7 +16,7 @@ command /w [<text>]:
         if arg-1 is set:
             if arg-1 is "clear":
 
-                make player execute command "/weather clear"
+                execute console command "/weather clear"
 
             else:
                 send "{@prefix}&cUsage : /w <target:clear>" to player

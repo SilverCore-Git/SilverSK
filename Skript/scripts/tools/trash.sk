@@ -1,0 +1,17 @@
+#
+# @copyright = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+command /trash:
+    aliases: tr
+    permission: skript.trash
+    permission message: %{permmessage}%
+    trigger:
+        wait 3 ticks
+        open chest with 3 rows named "§b―――――――― §3[ §5Silver Trash §3] §b――――――――" to player
+
+    
+
+# end

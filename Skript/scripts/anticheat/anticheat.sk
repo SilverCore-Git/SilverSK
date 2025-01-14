@@ -1,5 +1,5 @@
 #
-# @copiryght = 2024 SilverCore
+# @copyright = 2024 SilverCore
 # @autor = Silverdium
 # @autor = MisterPapaye
 #
@@ -49,12 +49,7 @@ on break:
 every 1 minutes:
     loop all players:
         if {suspect::%loop-player%} >= 5:
-            loop all players:
-                execute console command "tempban %loop-player% 1d Salut, je suis le SilverAntiCheat et je crois que tu fais des choses pas très légales... Pour de l'aide rejoins le Discord https://silverdium.fr !"
-                if loop-player has permission "skript.anticheat.alert":
-                    send "&8[&cSilver-AntiCheat&8]> &7&e%loop-player% &ca vien de se faire bannir par l'anticheat !" to loop-player
-                delete {suspect::%loop-player%}
-        
-
-
-#end
+            execute console command "tempban %loop-player% 1d Salut, je suis le SilverAntiCheat et je crois que tu fais des choses pas très légales... Pour de l'aide rejoins le Discord https://silverdium.fr !"
+            if loop-player has permission "skript.anticheat.alert":
+                send "&8[&cSilver-AntiCheat&8]> &7&e%loop-player% &c vien de se faire bannir par l'anticheat !" to loop-player
+            delete {suspect::%loop-player%}
