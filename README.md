@@ -6,6 +6,17 @@ Projet de scripts réalisé avec le plugin Minecraft [Skript](https://skript-mc.
 **Ces scripts ont été développés et testés sur la version 1.18 de Minecraft.**
 **La compatibilité n'est pas garantie.**
 
+## Inclus :
+- Anticheat
+- Gestion spawn
+- Gestion warp
+- Gestion spawn
+- Gestion homes
+- /god /vanish...
+- /tpa /tpaccespt /tpr...
+- allise : /gms /gmc /gmsp /day /night /w clear...
+- topluck, /inspect, /warn...
+
 ## Prérequis
 - [Skript V:2.9.4](https://github.com/SkriptLang/Skript/releases/tag/2.9.4)
 - [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/)
