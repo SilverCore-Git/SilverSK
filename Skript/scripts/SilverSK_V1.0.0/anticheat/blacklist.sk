@@ -7,7 +7,7 @@
 on load:
     send "Loading config with ./plugins/skript/scripts/blacklist.sk" to console
 
-command /blacklist [<text>] [<player>]:
+command /blacklist <text> <player>:
     aliases: bl
     permission: skript.staff.blacklist
     permission message: %{permmessage}%

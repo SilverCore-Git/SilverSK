@@ -8,7 +8,7 @@ options:
     $: %{balance::currency}%
     prefix: &a[Silver-Money] &f
 
-command /eco [<text>] [<player>] [<text>]:
+command /eco <text> <player> [<text>]:
     permission: skript.eco
     permission message: %{permmessage}%
     trigger:

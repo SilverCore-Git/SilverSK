@@ -20,7 +20,7 @@ command /money:
             message "{@prefix}Tu a actuelement &a%{balance::%player%}%{@$} &f!!"
 
 
-command /pay [<player>] [<text>]:
+command /pay <player> <text>:
     permission: skript.money
     permission message: %{permmessage}%
     trigger:

@@ -1,0 +1,101 @@
+#
+# @copyright = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+
+#_______________________________________________________________________
+#                                                                       |
+#  ███████╗██╗██╗     ██╗   ██╗███████╗██████╗     ███████╗██╗  ██╗     |
+#  ██╔════╝██║██║     ██║   ██║██╔════╝██╔══██╗    ██╔════╝██║ ██╔╝     |
+#  ███████╗██║██║     ██║   ██║█████╗  ██████╔╝    ███████╗█████╔╝      |
+#  ╚════██║██║██║     ╚██╗ ██╔╝██╔══╝  ██╔══██╗    ╚════██║██╔═██╗      |
+#  ███████║██║███████╗ ╚████╔╝ ███████╗██║  ██║    ███████║██║  ██╗     |
+#  ╚══════╝╚═╝╚══════╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝    ╚══════╝╚═╝  ╚═╝     |
+#_______________________________________________________________________|
+
+
+
+
+option:
+    ###     Config for SilverSK     ###
+
+        # #### Divers #### #
+    logs: false
+    prefix: true
+    forstart_balance: 1000
+    Permission_message: "%{prefix::dium}% &cVous n'avez pas accès à cette commande... (dommage dommage...)"
+    Correct_usage: "Utilisation :"
+
+        # #### Silver-AntiCheat config #### #
+    blacklist_player_mesage: "Tu es inscrit sur la BlackList, le Staff vient d'être averti de ta connexion !"
+    blacklist_player_log: "vien de se connecter mais il est inscrit sur la blacklist !"
+    blacklist_player_alert: "est connecté et est inscrit sur la blacklist !"
+
+    AutoClicker_suspected: "Dis donc, tu as un sacré CPS !"
+    AutoClicker_alert: "pourrait utiliser un AutoClicker !"
+
+    AutoMine_suspected: "Les blocs se cassent si rapidement avec toi..."
+    AutoMine_alert: "pourrait utiliser un AutoMine !"
+
+    Ban_reason: "Salut, je suis le SilverAntiCheat et je crois que tu fais des choses pas très légales..."
+    Ban_alert: "vien de se faire bannir par l'anticheat !"
+
+
+
+
+
+
+
+on load:
+    send "Loading config with ./plugins/skript/scripts/config.sk" to console
+
+
+# #### devers config
+    set {startbalance} to {@forstart_balance}  # Default start balance
+
+
+# #### Message config :
+    set {permmessage} to {@Permission_message}
+    set {used} to {@Correct_usage}
+
+# #### AntiCheat config :
+    set {config::anticheat::message::blacklistplayer} to {@blacklist_player_mesage}
+    set {config::anticheat::message::blacklistplayerstafflog} to {@blacklist_player_log}
+    set {config::anticheat::message::blacklistplayeralert} to {@blacklist_player_alert}
+
+    set {config::anticheat::message::cpsdetect} to {@AutoClicker_suspected}
+    set {config::anticheat::message::cpsdetectalert} to {@AutoClicker_alert}
+    
+    set {config::anticheat::message::autominedetect} to {@AutoMine_suspected}
+    set {config::anticheat::message::autominealert} to {@AutoMine_alert}
+    
+    set {config::anticheat::message::banraison} to {@Ban_reason}
+    set {config::anticheat::message::banalert} to {@Ban_alerts}
+
+# #### Config they prefix :
+    if {@prefix} is true:
+
+        set {prefix::chat} to "&8[&l&bSilver&8-&6chat&8]» &f"       # chat prefix
+        set {prefix::dium} to "&8[&6Silverdium&8]» &f"              # default prefix
+        set {prefix::cheat} to "&8[&cSilver-AntiCheat&8]> &f"       # anticheat prefix
+        set {prefix::inspect} to "&8[&4Silver-Inspect&8] &7"        # staff inspect prefix
+        set {prefix::join} to "&8[&6Silver-join&8]> &7"             # join prefix
+        set {prefix::staff} to "&8[&6Silver-stafftools&8] &7"       # staff tools prefix
+        set {prefix::logs} to "&8[&6Silver-logs&8] &7"              # Logs prefix
+    
+    else:
+        # if prefix is false, disabeled prefix
+        set {prefix::chat} to ""
+        set {prefix::dium} to ""
+        set {prefix::cheat} to ""
+        set {prefix::inspect} to ""
+        set {prefix::join} to ""
+        set {prefix::staff} to ""
+        set {prefix::logs} to ""
+
+
+
+
+#end

@@ -7,7 +7,7 @@
 on load:
     send "Loading skript ./plugins/skript/scripts/annonce.sk" to console
 
-command /annonce [<text>] [<player>]:
+command /annonce <text> [<player>]:
     permission: skript.staff.annonce
     permission message: %{permmessage}%
     trigger:

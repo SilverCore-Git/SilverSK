@@ -5,7 +5,7 @@
 #
 
 
-command /openinv [<player>] [<text>]:
+command /openinv <player> [<text>]:
     aliases: oi
     permission: skript.staff.openinv
     permission message: %{permmessage}%

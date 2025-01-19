@@ -9,6 +9,6 @@ on load:
     set {balance::currency} to "$"
 
 on first join:
-    set {balance::%player%} to "1000"
+    set {balance::%player%} to %{startbalance}%
 
 #end

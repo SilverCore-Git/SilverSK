@@ -1,0 +1,55 @@
+#
+# @copyright = 2024 SilverCore
+# @autor = Silverdium
+# @autor = MisterPapaye
+#
+
+
+on first join:
+
+    if player's name is {blacklist::*}:
+
+        send "%{prefix::cheat}%Le joueur %player% vien de rejoindre Silverdium mais est inscrit dans la BlackList !!" to console
+        send "%{prefix::cheat}%Le joueur %player% va être bani pour être dans la blacklist :" to console
+        send "%{blacklist::*}%"
+
+        wait 200 tick
+
+        execute console command "tempban %player% 30d Tu vien d'être banis automatiquement par l'anticheat car tu est inscrit dans la blackmist !!"
+
+    else:
+
+        broadcast "%{prefix::join}% &b%player% &evien de se connecter pour la premiere fois !!"
+        broadcast "%{prefix::join}% &b%player% &eBienvenue sur Silverdium amuse toi bien !!"
+
+        send "%{prefix::join}% &b%player% &eVien de se connecter pour la premiere fois !!" to console
+
+        execute console command "clear %player%"
+        execute console command "give %player% cooked_beef 64"
+        execute console command "give %player% torch 64"
+        execute console command "give %player% iron_pickaxe 1"
+        execute console command "give %player% iron_chestplate 1"
+        execute console command "give %player% leather_leggings 1"
+
+command /getkit [<player>]:
+    permission: skript.staff.getkit
+    permission message: %{permmessage}%
+    trigger:
+
+        if arg-1 is set:
+            execute console command "clear %arg-1%"
+            execute console command "give %arg-1% cooked_beef 64"
+            execute console command "give %arg-1% torch 64"
+            execute console command "give %arg-1% iron_pickaxe 1"
+            execute console command "give %arg-1% iron_chestplate 1"
+            execute console command "give %arg-1% leather_leggings 1"
+            
+        else:
+            execute console command "clear %player%"
+            execute console command "give %player% cooked_beef 64"
+            execute console command "give %player% torch 64"
+            execute console command "give %player% iron_pickaxe 1"
+            execute console command "give %player% iron_chestplate 1"
+            execute console command "give %player% leather_leggings 1"
+
+# end

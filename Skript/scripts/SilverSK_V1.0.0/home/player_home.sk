@@ -8,7 +8,7 @@ options:
 on load:
     send "Loading skript ./plugins/skript/scripts/home/player_home.sk" to console
 
-command /sethome [<text>]:
+command /sethome <text>:
     permission: skript.home
     permission message: "Vous n'avez pas la permission de définir un home!"
     trigger:
@@ -20,7 +20,7 @@ command /sethome [<text>]:
         else:
             send "{@prefix}&cUsage : /sethome <home>" to player
 
-command /delhome [<text>]:
+command /delhome <text>:
     permission: skript.home
     permission message: "Vous n'avez pas la permission de supprimer un home!"
     trigger:

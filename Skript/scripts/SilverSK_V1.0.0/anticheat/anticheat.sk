@@ -6,42 +6,43 @@
 
 
 options:
-    prefix: "&8[&cSilver-AntiCheat&8]> &7"
+    prefix: &8[&cSilver-AntiCheat&8]> &7
 
-# Création de la blacklist
 on load:
     send "Loading skript ./plugins/skript/scripts/anticheat.sk" to console
 
     send "Black list player : %{blacklist::*}%" to console
 
+
 # Détection de connexion avec blacklist
 on join:
     if player's name is {blacklist::*}:
-        send "&8[&cSilver-AntiCheat&8]> &7&e%player% &cTu es inscrit sur la BlackList, le Staff vient d'être averti de ta connexion !" to player
+        send "{@prefix}&e%player% &cTu es inscrit sur la BlackList, le Staff vient d'être averti de ta connexion !" to player
+        send "{@prefix}&6%player% &fvien de se connecter mais il est inscrit sur la blacklist !" to console
         loop all players:
             if loop-player has permission "skript.anticheat.alert":
-                send "&8[&cSilver-AntiCheat&8]> &7&e%player% &cest connecté et est inscrit sur la blacklist !" to loop-player
+                send "{@prefix}&e%player% &cest connecté et est inscrit sur la blacklist !" to loop-player
 
 
 # Détection de clics trop rapides (AutoClicker)
 on click:
-    if difference between {lastclick::%player%} and now < 55 millisecond:
+    if difference between {lastclick::%player%} and now < 60 millisecond:
         cancel event
-        send "&8[&cSilver-AntiCheat&8]> &7&cDis donc, tu as un sacré CPS !" to player
+        send "{@prefix}&cDis donc, tu as un sacré CPS !" to player
         loop all players:
             if loop-player has permission "skript.anticheat.alert":
-                send "&8[&cSilver-AntiCheat&8]> &7&e%player% &cpourrait utiliser un AutoClicker !" to loop-player
+                send "{@prefix}&e%player% &cpourrait utiliser un AutoClicker !" to loop-player
         add 1 to {suspect::%player%}
     set {lastclick::%player%} to now
 
 # Détection de casse de blocs trop rapide
 on break:
-    if difference between {lastbreak::%player%} and now < 55 millisecond:
+    if difference between {lastbreak::%player%} and now < 60 millisecond:
         cancel event
-        send "&8[&cSilver-AntiCheat&8]> &7&cLes blocs se cassent si rapidement avec toi..." to player
+        send "{@prefix}&cLes blocs se cassent si rapidement avec toi..." to player
         loop all players:
             if loop-player has permission "skript.anticheat.alert":
-                send "&8[&cSilver-AntiCheat&8]> &7&e%player% &cpourrait utiliser un AutoMine !" to loop-player
+                send "{@prefix}&e%player% &cpourrait utiliser un AutoMine !" to loop-player
         add 1 to {suspect::%player%}
     set {lastbreak::%player%} to now
 
@@ -51,5 +52,5 @@ every 1 minutes:
         if {suspect::%loop-player%} >= 5:
             execute console command "tempban %loop-player% 1d Salut, je suis le SilverAntiCheat et je crois que tu fais des choses pas très légales... Pour de l'aide rejoins le Discord https://silverdium.fr !"
             if loop-player has permission "skript.anticheat.alert":
-                send "&8[&cSilver-AntiCheat&8]> &7&e%loop-player% &c vien de se faire bannir par l'anticheat !" to loop-player
+                send "{@prefix}&e%loop-player% &c vien de se faire bannir par l'anticheat !" to loop-player
             delete {suspect::%loop-player%}

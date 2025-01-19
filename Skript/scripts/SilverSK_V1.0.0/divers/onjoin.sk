@@ -10,15 +10,11 @@ options:
 on load:
     send "Loading skript ./plugins/skript/scripts/onjoin.sk" to console
 
-on first join:
-    send "{@prefix} Bienvenue sur silverdium !!" to player
-
 
 on join:
     set {player_luckinfo::%player%} to 0
     set {diamond_mined::%player%} to 0 
     set {blocks_mined::%player%} to 0
-    set {_percent::%player%} to 0
     set {vanish::%player%} to false
     
     if player's name is "MisterLyle" or "MisterPapaye":
