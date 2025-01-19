@@ -6,6 +6,17 @@ Projet de scripts réalisé avec le plugin Minecraft [Skript](https://skript-mc.
 **Ces scripts ont été développés et testés sur la version 1.18 de Minecraft.**
 **La compatibilité n'est pas garantie.**
 
+## Inclus :
+- Anticheat
+- Gestion spawn
+- Gestion warp
+- Gestion spawn
+- Gestion homes
+- /god /vanish...
+- /tpa /tpaccespt /tpr...
+- allise : /gms /gmc /gmsp /day /night /w clear...
+- topluck, /inspect, /warn...
+
 ## Prérequis
 - [Skript V:2.9.4](https://github.com/SkriptLang/Skript/releases/tag/2.9.4)
 - [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/)
@@ -16,8 +27,7 @@ Projet de scripts réalisé avec le plugin Minecraft [Skript](https://skript-mc.
 
 
 ---
-Merci de soutenir les projets [SilverCore](https://core.silverdium.fr) !<br>
-[Vous pouvez nous aider](https://tipeee.com/silverdium) !<br>
-
-Copyright (c) 2024 SilverCore | Tous droits réservés.<br>
-Vous n'êtes pas autorisé à vendre ce code sans l'autorisation explicite de l'auteur.
+by [SilverCore](https://github.com/SilverCore-Git) 👑 [Vous pouvez nous aider](https://tipeee.com/silverdium) 😎💸<br>
+Merci de soutenir les projets SilverCore ❤️ !<br>
+🔐 Vous n'êtes pas autorisé à vendre ce code sans l'autorisation explicite de l'auteur. 🛡️<br>
+⭐  SilverCore ©️ Tous droits reserver  ⭐
