@@ -1,6 +1,8 @@
 # SilverSK
 Projet de scripts réalisé avec le plugin Minecraft [Skript](https://skript-mc.fr/) et l'addon [SkQuery](https://www.spigotmc.org/resources/skquery-1-13-1-19.36631/) !
 
+code non maintenu
+
 ---
 # Projet en développement, tous les scripts ne sont pas fonctionnels
 **Ces scripts ont été développés et testés sur la version 1.18 de Minecraft.**
@@ -29,5 +31,4 @@ Projet de scripts réalisé avec le plugin Minecraft [Skript](https://skript-mc.
 ---
 by [SilverCore](https://github.com/SilverCore-Git) 👑 [Vous pouvez nous aider](https://tipeee.com/silverdium) 😎💸<br>
 Merci de soutenir les projets SilverCore ❤️ !<br>
-🔐 Vous n'êtes pas autorisé à vendre ce code sans l'autorisation explicite de l'auteur. 🛡️<br>
 ⭐  SilverCore ©️ Tous droits reserver  ⭐
